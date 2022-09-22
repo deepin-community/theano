@@ -1,0 +1,5 @@
+version=4
+# old upstream (current package) https://github.com/theano/theano/releases (?:.*/)?rel-(\d[\d\.]+)\.tar\.gz
+# new upstream (to switch after Debian release? reminder - change the link in d/copyright then)
+opts="filenamemangle=s/(?:.*)rel-(\d[\d\.]+)\.tar\.gz/theano-$1.tar.gz/,repacksuffix=+dfsg,dversionmangle=s/\+dfsg[0-9]*//" \
+https://github.com/pymc-devs/aesara/releases (?:.*/)?rel-(\d[\d\.]+)\.tar\.gz

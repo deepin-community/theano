@@ -1,0 +1,12 @@
+#!/bin/sh
+export THEANO_FLAGS=base_compiledir='$AUTOPKGTEST_TMP/theanocache',init_gpu_device=opencl0:0
+#Avoid importing the source tree
+cd $AUTOPKGTEST_TMP
+#workaround for #997908
+if [ `dpkg --print-architecture` = armel -o `dpkg --print-architecture` = armhf ] ; then
+    export POCL_DEVICES=basic
+fi
+
+#Check that GPU use isn't totally broken
+#(it is known to not be complete under OpenCL)
+python3 -m theano.bin.theano_nose -v theano.gpuarray.tests.test_subtensor:G_advancedsubtensor.test_adv_sub_slice theano.gpuarray.tests.test_rng_mrg:test_GPUA_full_fill

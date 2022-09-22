@@ -1,0 +1,202 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: theano
+Upstream-Contact: Theano development list <theano-dev@googlegroups.com>
+Source: https://github.com/Theano/Theano
+Files-Excluded: .gitignore
+                doc/.templates/layout.html
+                doc/library/d3viz/examples/d3viz/js/*.min.js
+                theano/d3viz/js/*.min.js
+
+Files: *
+Copyright: 2008-2020 Theano Development Team <theano-dev@googlegroups.com>
+           2005-2016 NumPy Developers
+License: BSD-3-Clause
+Comment: "Theano Development Team" was led by MILA (previously LISA lab, University of Montreal), but includes external contributors (see NEWS.txt and HISTORY.txt).  theano/tests/main.py is the file explicitly marked as "contains code adapted from NumPy", but doc/acknowledgement.txt suggests it is not the only part based on NumPy.
+
+Files: debian/*
+Copyright: 2016 Daniel Stender <stender@debian.org>
+           2017-2020 Rebecca N. Palmer <rebecca_palmer@zoho.com>
+License: BSD-3-Clause
+
+Files: debian/missing-source/*
+Copyright: 2012-2016 Chris Pettitt <cpettitt@gmail.com> and contributors
+Comment: from https://github.com/dagrejs/graphlib-dot with some changes (see debian/missing-source/js_fixes.diff)
+License: Expat
+
+Files: theano/gof/sched.py
+Copyright: 2008-2016 Theano Development Team <theano-dev@googlegroups.com>
+           2012 Oren Tirosh
+License: BSD-3-Clause and Expat
+
+Files: theano/gpuarray/c_code/corr_gemm.c
+       theano/gpuarray/c_code/corr3d_gemm.c
+       theano/tensor/nnet/c_code/corr_gemm.c
+       theano/tensor/nnet/c_code/corr3d_gemm.c
+Copyright: 2014 The Regents of the University of California
+           2008-2017 Theano Development Team <theano-dev@googlegroups.com>
+License: BSD-3-Clause
+Comment: the original was BSD-2-Clause, but the combination of BSD-2 and BSD-3 is BSD-3
+
+Files: theano/gpuarray/c_code/topk_common.cuh
+       theano/gpuarray/c_code/topk_dense.cu
+       theano/gpuarray/c_code/topk_dense_large.cu
+Copyright: 2014-2016 Facebook, Inc            (Adam Paszke, Soumith Chintala)
+           2001-2014 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+           2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+           2011-2013 NYU                      (Clement Farabet)
+           2006-2012 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston, Koray Kavukcuoglu)
+           2016-2017 Theano Development Team <theano-dev@googlegroups.com>
+License: BSD-3-Clause
+
+Files: theano/gpuarray/rng_mrg.py
+       theano/sandbox/rng_mrg.py
+Copyright: 2008-2010 Pierre L'Ecuyer and University of Montreal
+           2010-2019 Theano Development Team <theano-dev@googlegroups.com>
+License: BSD-3-Clause
+Comment: the SSJ original was GPL-3+, but doc/acknowledgement.txt says permission was granted to relicense
+
+Files: theano/misc/cpucount.py
+Copyright: 2006-2008 R. Oudkerk
+License: BSD-3-Clause
+
+Files: theano/misc/frozendict.py
+Copyright: 2012 Santiago Lezica
+License: Expat
+Comment: https://github.com/slezica/python-frozendict/blob/master/LICENSE.txt
+
+Files: theano/misc/hooks/reindent.py
+Copyright: 2000 Tim Peters
+License: public-domain
+ Released to the public domain, by Tim Peters, 03 October 2000.
+
+Files: theano/misc/ordered_set.py
+Copyright: 2009 Raymond Hettinger
+           2008-2016 Theano Development Team <theano-dev@googlegroups.com>
+License: BSD-3-Clause and Expat
+
+Files: theano/tensor/basic.py
+Copyright: 2008-2020 Theano Development Team <theano-dev@googlegroups.com>
+           2010-2012 Tijmen Tieleman
+License: BSD-3-Clause and Expat
+
+Comment: three variants differing only in the names in clause 3 and formatting; reproducing them all here as this is a license that requires including its text, most of the package uses the first one
+License: BSD-3-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ * Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+ * Neither the name of Theano nor the names of its contributors may be
+   used to endorse or promote products derived from this software without
+   specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ''AS IS'' AND ANY
+ EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ .
+ All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ .
+ 3. Neither the names of Facebook, Deepmind Technologies, NYU, NEC Laboratories America
+    and IDIAP Research Institute nor the names of its contributors may be
+    used to endorse or promote products derived from this software without
+    specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ .
+ All rights reserved.
+ .
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+ .
+ 3. Neither the name of the copyright holder nor the names of its contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the Software without restriction, including without limitation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ and/or sell copies of the Software, and to permit persons to whom the
+ Software is furnished to do so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ DEALINGS IN THE SOFTWARE.
+
+License: BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+

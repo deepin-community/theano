@@ -1,0 +1,14 @@
+Document: theano-doc
+Title: Theano documentation
+Author: LISA lab, University of Montreal
+Abstract: Theano (python3-theano) is a Python optimizing compiler
+ for evaluating mathematical expressions as native machine instructions and massively
+ accelerated on GPU hardware.
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/theano-doc/html/index.html
+Files: /usr/share/doc/theano-doc/html/*.html
+
+Format: PDF
+Files: /usr/share/doc/theano-doc/html/theano.pdf

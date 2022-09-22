@@ -1,0 +1,30 @@
+Description: Disable overly environment-dependent tests
+ Testing speed by wall-clock time is inherently unreliable on a
+ shared machine such as Debian's buildds: don't let it fail the whole build.
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Bug-Debian: https://bugs.debian.org/835531
+Forwarded: not-needed
+
+--- a/theano/sparse/tests/test_basic.py
++++ b/theano/sparse/tests/test_basic.py
+@@ -1274,8 +1274,7 @@ class test_structureddot(unittest.TestCa
+             overhead_tol = 0.003  # seconds overall
+             overhead_rtol = 1.2  # times as long
+             utt.assert_allclose(scipy_result, theano_result)
+-            if (theano.config.mode == "FAST_RUN" and
+-                theano.config.cxx):
++            if 0:
+                 self.assertFalse(theano_time > overhead_rtol * scipy_time +
+                                  overhead_tol)
+ 
+@@ -1311,8 +1310,8 @@ class test_structureddot(unittest.TestCa
+             overhead_tol = 0.002  # seconds
+             overhead_rtol = 1.1  # times as long
+             utt.assert_allclose(scipy_result, theano_result)
+-            if (theano.config.mode == "FAST_RUN" and
+-                theano.config.cxx):
++            
++            if 0:#(not theano.config.mode in ["DebugMode", "DEBUG_MODE"] and theano.config.cxx):
+                     self.assertFalse(
+                         theano_time > overhead_rtol * scipy_time + overhead_tol,
+                         (theano_time,

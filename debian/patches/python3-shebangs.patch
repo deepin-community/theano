@@ -1,0 +1,54 @@
+Description: Use Python 3 in script shebangs
+
+Intended to cover the ones we use and/or ship as executable; doing
+them all would be untested (e.g. check_dnn_conv.py is Nvidia-only)
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Forwarded: no
+
+--- a/bin/theano-cache
++++ b/bin/theano-cache
+@@ -1,3 +1,3 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ import theano_cache
+ theano_cache.main()
+--- a/bin/theano-nose
++++ b/bin/theano-nose
+@@ -1,3 +1,3 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ import theano_nose
+ theano_nose.main()
+--- a/bin/theano_cache.py
++++ b/bin/theano_cache.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ from __future__ import print_function
+ import logging
+ import os
+--- a/bin/theano_nose.py
++++ b/bin/theano_nose.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ """
+ This script should behave the same as the `nosetests` command.
+ 
+--- a/theano/tests/run_tests_in_batch.py
++++ b/theano/tests/run_tests_in_batch.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ from __future__ import absolute_import, print_function, division
+ 
+ import datetime
+--- a/setup.py
++++ b/setup.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ #
+ #  TODO:
+ #   * Figure out how to compile and install documentation automatically

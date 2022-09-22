@@ -1,0 +1,20 @@
+Description: Warn that not everything works in OpenCL
+
+There are definitely test failures, but I have not checked whether
+any of them are "wrong answer without warning"
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Bug: https://github.com/Theano/Theano/issues/2936
+Forwarded: no
+
+--- theano-1.0.4+dfsg.orig/theano/gpuarray/__init__.py
++++ theano-1.0.4+dfsg/theano/gpuarray/__init__.py
+@@ -82,6 +82,8 @@ def init_dev(dev, name=None, preallocate
+             " libgpuarray or Theano to fix this problem.",
+             gpuarray_version_major_detected,
+             gpuarray_version_major_supported)
++    if dev.startswith("opencl"):
++        warnings.warn("Theano's OpenCL support is incomplete and may contain bugs (some tests fail)")
+     if dev not in init_dev.devmap:
+         args = dict()
+         if config.gpuarray.cache_path != '':

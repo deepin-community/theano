@@ -1,0 +1,90 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+#export DEB_BUILD_OPTIONS=nocheck
+export PYBUILD_NAME=theano
+export PYBUILD_INSTALL_ARGS=--install-scripts=/usr/share/{package}
+export THEANO_FLAGS=base_compiledir='.pybuild',device=cpu
+export PYTHONPATH=$(CURDIR)
+export HOME=$(CURDIR)/jupyter_tmp
+DO_PACKAGES=$(shell dh_listpackages)
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_clean:
+	mv theano/bin -T bin || true
+	rm -rf theano/d3viz/js/*.min.js doc/library/d3viz/examples/d3viz/js/*.min.js debian/missing-source/*.js debian/missing-source/lodash debian/missing-source/graphlib-dot/bower.json debian/missing-source/graphlib-dot/lib/dot-grammar.js debian/missing-source/graphlib-dot/lib/version.js debian/missing-source/graphlib-dot/dist doc/.pybuild doc/library/d3viz/.pybuild Theano.egg-info theano/scan_module/c_code/scan_perform.c jupyter_tmp
+	make -C debian/missing-source/graphlib-dot clean
+	dh_auto_clean
+
+override_dh_auto_build:
+	# note this assumes all modules referenced via 'node_modules' are under /usr/share, not /usr/lib
+	ln -s /usr/share/nodejs debian/missing-source/graphlib-dot/node_modules
+	#graphlib-dot.js
+	cd debian/missing-source && patch -p1 < js_fixes.diff
+	make -C debian/missing-source/graphlib-dot --always-make dist
+	cp debian/missing-source/graphlib-dot/dist/graphlib-dot.min.js theano/d3viz/js
+	cd debian/missing-source && patch -p1 -R < js_fixes.diff
+	#dagre-d3.js
+	cp /usr/share/nodejs/dagre-d3/dist/dagre-d3.min.js theano/d3viz/js
+	#d3 - workaround for #745688
+	terser /usr/share/javascript/d3/d3.js -m -c --comments '@license' -o theano/d3viz/js/d3.v3.min.js
+	cp theano/d3viz/js/*.min.js doc/library/d3viz/examples/d3viz/js
+	# put the scripts in theano not a generic directory - #967006
+	mv bin -T theano/bin
+	#the cython code is the only part of theano itself that needs building - the C code is runtime compiled
+	cd $(CURDIR)/theano/scan_module && cython3 scan_perform.pyx
+	#remove relative paths from comments - they are unreproducible (depends on the number of levels in the build path) and probably wrong when installed
+	cd $(CURDIR)/theano/scan_module && sed -iE -e 's#/\* "[./]*usr/lib/#/\* "/usr/lib/#g' scan_perform.c
+	#this patch is to code Cython copies from itself (Cython/Includes/numpy/__init__.pxd), that only exists in older versions - #918771
+	cd $(CURDIR)/theano/scan_module && dpkg --compare-versions `dpkg-query -f '$${Version}' -W cython3` gt 0.29~ || patch --no-backup-if-mismatch scan_perform.c numpy_api_changes.diff
+	cd $(CURDIR)/theano/scan_module && mv scan_perform.c -t c_code
+	#documentation
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+ifneq (,$(filter theano-doc,$(DO_PACKAGES)))
+	sed -i -e "s/!pip/#!pip/g" doc/library/d3viz/index.ipynb
+	mkdir jupyter_tmp
+	#check that we can run this, but throw away the result because it's unreproducible (profiling output)
+	cp $(CURDIR)/doc/library/d3viz/index.ipynb jupyter_tmp && jupyter-nbconvert --to notebook --execute $(CURDIR)/jupyter_tmp/index.ipynb --output $(CURDIR)/jupyter_tmp/test.ipynb
+	#...but do use the ipynb-to-html-etc conversion
+	jupyter-nbconvert --to html doc/library/d3viz/index.ipynb
+	sed -i -e "s/#!pip/!pip/g" doc/library/d3viz/index.ipynb
+	python3 doc/scripts/docgen.py
+endif
+	rst2html README.rst README.html
+	cat NEWS.txt HISTORY.txt | gzip -n -9 > NEWS.gz
+endif
+
+override_dh_auto_install:
+	dh_auto_install
+	rm -fv debian/python*-theano/usr/lib/python*/dist-packages/theano/misc/check_blas_many.sh
+
+
+#dh checks _OPTIONS, we need to check _PROFILES as well because we use -P to skip tests on salsa-ci
+override_dh_auto_test:
+ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
+	PYBUILD_SYSTEM=custom PYBUILD_TEST_ARGS='PYTHONPATH=. {interpreter} theano/tests/run_tests_in_batch.py' dh_auto_test
+endif
+
+override_dh_installdocs:
+	dh_installdocs -A README.html NEWS.gz
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+ifneq (,$(filter theano-doc,$(DO_PACKAGES)))
+	rdfind -outputname /dev/null -makesymlinks true debian/theano-doc
+	symlinks -r -s -c debian/theano-doc
+endif
+endif
+
+override_dh_installchangelogs:
+	#the -X is meant as "don't try to install upstream changelog, only Debian's" - #906827
+	dh_installchangelogs -Xtxt
+
+override_dh_sphinxdoc:
+	dh_sphinxdoc
+	rm -fv debian/theano-doc/usr/share/doc/theano-doc/html/_sources/LICENSE.txt # extra-license-file
+
+override_dh_compress:
+	dh_compress -X.py -X.ipynb -X.pdf # save theano-doc/html/_downloads
+
+override_dh_gencontrol:
+	dh_gencontrol -- -VjavascriptBU="$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), \n' -W node-lodash)$(shell dpkg-query -f '$${source:Package} (= $${source:Version}), \n' -W libjs-d3)"

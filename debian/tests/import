@@ -1,0 +1,4 @@
+#!/usr/bin/python3
+import os
+os.environ['THEANO_FLAGS']="base_compiledir='"+os.environ.get('AUTOPKGTEST_TMP','')+"/theanocache'"
+import theano

@@ -1,0 +1,40 @@
+Description: strip privacy-breach-generic stuff from docs
+ and disable html_last_updated_fmt for reproducible builds
+Author: Daniel Stender <stender@debian.org>, Rebecca Palmer
+Forwarded: not-needed
+
+--- a/doc/conf.py
++++ b/doc/conf.py
+@@ -161,7 +161,7 @@ html_static_path = ['.static', 'images',
+ 
+ # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
+ # using the given strftime format.
+-html_last_updated_fmt = '%b %d, %Y'
++# html_last_updated_fmt = '%b %d, %Y'
+ 
+ # If true, SmartyPants will be used to convert quotes and dashes to
+ # typographically correct entities.
+--- a/doc/index.txt
++++ b/doc/index.txt
+@@ -117,21 +117,6 @@ installation and configuration, see :ref
+ 
+ .. only:: html
+ 
+-  Status
+-  ======
+-
+-  .. raw:: html
+-
+-     <a href="http://travis-ci.org/Theano/Theano/builds"><img src="https://secure.travis-ci.org/Theano/Theano.png?branch=master" /></a>&nbsp;
+-
+-  .. raw:: html
+-
+-     <a href="https://crate.io/packages/Theano/"><img src="https://img.shields.io/pypi/v/Theano.svg" alt="Latest PyPI version" /></a>&nbsp;
+-
+-  .. raw:: html
+-
+-     <a href="https://crate.io/packages/Theano/"><img src="https://img.shields.io/pypi/dm/Theano.svg" alt="Number of PyPI downloads" /></a>&nbsp;
+-
+ .. _available on PyPI: http://pypi.python.org/pypi/Theano
+ .. _Related Projects: https://github.com/Theano/Theano/wiki/Related-projects
+ 

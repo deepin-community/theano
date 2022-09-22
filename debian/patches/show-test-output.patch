@@ -1,0 +1,25 @@
+Description: Show test names when run, not when IDs collected
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Forwarded: not-needed
+
+--- theano-1.0.2+dfsg.orig/theano/tests/run_tests_in_batch.py
++++ theano-1.0.2+dfsg/theano/tests/run_tests_in_batch.py
+@@ -67,7 +67,7 @@ nosetests.
+ 
+ 
+ def main(stdout=None, stderr=None, argv=None, theano_nose=None,
+-         batch_size=None, time_profile=False, display_batch_output=False):
++         batch_size=None, time_profile=False, display_batch_output=True):
+     """
+     Run tests with optional output redirection.
+ 
+@@ -189,6 +189,8 @@ def run(stdout, stderr, argv, theano_nos
+                 subprocess_extra_args.update(dict(
+                     stdout=dummy_out.fileno(),
+                     stderr=dummy_out.fileno()))
++            if display_batch_output:
++                cmd.append('-v')
+             t0 = time.time()
+             subprocess.call(cmd, **subprocess_extra_args)
+             t1 = time.time()

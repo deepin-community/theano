@@ -1,0 +1,16 @@
+Description: Fail the build on test failures
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Bug-Debian: https://bugs.debian.org/955471
+Forwarded: no
+--- theano-1.0.4+dfsg.orig/theano/tests/run_tests_in_batch.py
++++ theano-1.0.4+dfsg/theano/tests/run_tests_in_batch.py
+@@ -221,7 +221,7 @@ def run(stdout, stderr, argv, theano_nos
+                 stderr=stderr.fileno())
+             stdout.flush()
+             stderr.flush()
+-            return 0
++            return 1
+         else:
+             print("""\
+ ####################

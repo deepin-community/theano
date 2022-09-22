@@ -1,0 +1,20 @@
+Description: Don't ignore THEANO_FLAGS when building documentation
+
+This is needed to allow debian/rules to change base_compiledir,
+as pbuilder does not allow writing to the build user's home directory 
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Forwarded: no
+Last-Update: 2018-03-17
+
+--- theano-1.0.1+dfsg.orig/doc/scripts/docgen.py
++++ theano-1.0.1+dfsg/doc/scripts/docgen.py
+@@ -56,7 +56,7 @@ if __name__ == '__main__':
+ 
+     # Make sure we don't use gpu to compile documentation
+     env_th_flags = os.environ.get('THEANO_FLAGS', '')
+-    os.environ['THEANO_FLAGS'] = 'device=cpu,force_device=True'
++    os.environ['THEANO_FLAGS'] = ((os.environ['THEANO_FLAGS']+',') if os.environ.get('THEANO_FLAGS','') else '')+'device=cpu,force_device=True'
+ 
+     def call_sphinx(builder, workdir):
+         import sphinx

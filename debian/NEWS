@@ -1,0 +1,13 @@
+theano (1.0.1+dfsg-1) unstable; urgency=medium
+
+  Theano's primary developers are ending its development:
+  they are currently providing maintenance only (not active development),
+  and intend to also terminate this in late 2018.
+  I intend to keep this package available for the time being, but
+  it may eventually be necessary to remove it,
+  e.g. if it does not work with future versions of its dependencies.
+  See https://arxiv.org/pdf/1605.02688.pdf section II.E for a
+  discussion of alternatives; of these, Torch (but not its Python
+  bindings) and Caffe are currently packaged in Debian.  
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sun, 18 Mar 2018 22:12:03 +0000

@@ -1,0 +1,12 @@
+disable-overly-environment-dependent-test.patch
+strip-docs.patch
+linkcode.patch
+docgen-homedir.patch
+doc-use-local-links.patch
+improve-cache-permission-errors.patch
+show-test-output.patch
+opencl-warn.patch
+python3-shebangs.patch
+fail-on-test-fail.patch
+bin-in-theano.patch
+sphinx42_compat.patch

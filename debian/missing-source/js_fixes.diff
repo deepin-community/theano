@@ -1,0 +1,71 @@
+Changes made to these JavaScript modules to allow skipping tests with not-in-Debian dependencies, build verbosely, and allow use of browserify-lite and newer pegjs.
+
+Generated files deleted: */dist/*, graphlib-dot/bower.json, graphlib-dot/lib/dot-grammar.js, graphlib-dot/lib/version.js
+
+diff -upr a/graphlib-dot/Makefile b/graphlib-dot/Makefile
+--- a/graphlib-dot/Makefile
++++ b/graphlib-dot/Makefile
+@@ -1,14 +1,14 @@
+ MOD = graphlib-dot
+ 
+ NPM = npm
+-BROWSERIFY = ./node_modules/browserify/bin/cmd.js
++BROWSERIFY = browserify-lite
+ ISTANBUL = ./node_modules/istanbul/lib/cli.js
+ JSHINT = ./node_modules/jshint/bin/jshint
+ ESLINT = ./node_modules/eslint/bin/eslint.js
+ KARMA = ./node_modules/karma/bin/karma
+ MOCHA = ./node_modules/mocha/bin/_mocha
+-PEGJS = ./node_modules/pegjs/bin/pegjs
+-UGLIFY = ./node_modules/uglify-js/bin/uglifyjs
++PEGJS = pegjs
++UGLIFY = terser
+ 
+ ISTANBUL_OPTS = --dir $(COVERAGE_DIR) --report html
+ JSHINT_OPTS = --reporter node_modules/jshint-stylish/stylish.js
+@@ -21,8 +21,7 @@ DIST_DIR = dist
+ SRC_FILES = index.js lib/dot-grammar.js lib/version.js $(shell find lib -type f -name '*.js')
+ TEST_FILES = $(shell find test -type f -name '*.js' | grep -v 'bundle-test.js')
+ BUILD_FILES = $(addprefix $(BUILD_DIR)/, \
+-						$(MOD).js $(MOD).min.js \
+-						$(MOD).core.js $(MOD).core.min.js)
++						$(MOD).js $(MOD).min.js)
+ 
+ DIRS = $(BUILD_DIR)
+ 
+@@ -31,7 +30,7 @@ DIRS = $(BUILD_DIR)
+ all: unit-test lint
+ 
+ lib/dot-grammar.js: src/dot-grammar.pegjs
+-	$(PEGJS) --allowed-start-rules "start,graphStmt" -e 'module.exports' $< $@
++	$(PEGJS) --allowed-start-rules "start,graphStmt" -o $@ $<
+ 
+ lib/version.js: package.json
+ 	@src/release/make-version.js > $@
+@@ -39,10 +38,10 @@ lib/version.js: package.json
+ $(DIRS):
+ 	@mkdir -p $@
+ 
+-test: unit-test browser-test
++test: unit-test
+ 
+-unit-test: $(SRC_FILES) $(TEST_FILES) node_modules | $(BUILD_DIR)
++unit-test: $(SRC_FILES) $(TEST_FILES) | $(BUILD_DIR)
+-	@$(ISTANBUL) cover $(ISTANBUL_OPTS) $(MOCHA) --dir $(COVERAGE_DIR) -- $(MOCHA_OPTS) $(TEST_FILES) || $(MOCHA) $(MOCHA_OPTS) $(TEST_FILES)
++	$(ISTANBUL) cover $(ISTANBUL_OPTS) $(MOCHA) --dir $(COVERAGE_DIR) -- $(MOCHA_OPTS) $(TEST_FILES) || $(MOCHA) $(MOCHA_OPTS) $(TEST_FILES)
+ 
+ browser-test: $(BUILD_DIR)/$(MOD).js $(BUILD_DIR)/$(MOD).core.js
+ 	$(KARMA) start --single-run $(KARMA_OPTS)
+@@ -56,10 +55,10 @@ browser-test: $(BUILD_DIR)/$(MOD).js $(B
+ 	@src/release/make-bower.json.js > $@
+ 
+ $(BUILD_DIR)/$(MOD).js: browser.js $(SRC_FILES) | unit-test
+-	@$(BROWSERIFY) $< > $@
++	$(BROWSERIFY) ./$< --outfile $@
+ 
+ $(BUILD_DIR)/$(MOD).min.js: $(BUILD_DIR)/$(MOD).js
+-	@$(UGLIFY) $< --comments '@license' > $@
++	$(UGLIFY) $< --comments '@license' > $@
+ 
+ $(BUILD_DIR)/$(MOD).core.js: browser.js | unit-test
+ 	@$(BROWSERIFY) $< > $@ --no-bundle-external

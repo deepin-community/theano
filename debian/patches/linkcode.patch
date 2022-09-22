@@ -1,0 +1,27 @@
+Description: Don't try to link to the git commit number
+
+It will be either nonexistent (crashing the build), or an Alioth/etc
+commit that isn't in upstream's repository (making broken links)
+
+Also don't try to link above the root
+(theano.gof.graph.nodes_constructed() is decorated, which makes it find
+the decorator from libpython), as this won't work and is unreproducible
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Forwarded: no
+
+--- a/doc/conf.py
++++ b/doc/conf.py
+@@ -222,9 +222,9 @@ def linkcode_resolve(domain, info):
+     except Exception:
+         filename = info['module'].replace('.', '/') + '.py'
+     import subprocess
+-    tag = subprocess.Popen(['git', 'rev-parse', 'HEAD'],
+-                           stdout=subprocess.PIPE,
+-                           universal_newlines=True).communicate()[0][:-1]
++    if filename.startswith('theano/../'):
++        return None
++    tag = 'rel-'+release
+     return "https://github.com/Theano/theano/blob/%s/%s" % (tag, filename)
+ 
+ # Options for LaTeX output

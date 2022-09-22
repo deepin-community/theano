@@ -1,0 +1,1 @@
+extend-diff-ignore="theano/generated_version.py|^[^/]+\.egg-info/"

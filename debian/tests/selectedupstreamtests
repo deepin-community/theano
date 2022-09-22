@@ -1,0 +1,7 @@
+#!/bin/sh
+export THEANO_FLAGS=base_compiledir='$AUTOPKGTEST_TMP/theanocache'
+#Avoid importing the source tree
+cd $AUTOPKGTEST_TMP
+
+#A random-ish selection of upstream's tests, as the whole thing takes hours
+python3 -m theano.bin.theano_nose -v theano.tensor.tests.test_basic:T_add theano.tensor.tests.test_subtensor:T_subtensor.test_noncontiguous_idx theano.tensor.tests.test_opt:test_log1p theano.tensor.tests.test_blas:TestSgemv.test_a_strides theano.tensor.tests.test_nlinalg:test_SVD.test_svd theano.tensor.tests.test_shared_randomstreams:T_SharedRandomStreams.test_binomial_vector theano.tensor.tests.test_mpi theano.tensor.nnet.tests.test_sigm:UltraFastSigmoidTester theano.tensor.signal.tests.test_pool:TestDownsampleFactorMax.test_max_pool_2d_2D theano.sparse.tests.test_opt:test_sd_csc theano.scan_module.tests.test_scan:T_Scan.test_scan_merge_nodes theano.scalar.tests.test_basic:test_logical theano.gof.tests.test_opt:TestPatternOptimizer.test_ambiguous theano.d3viz.tests.test_d3viz:TestD3Viz.test_mlp_profiled theano.compile.tests.test_pfunc:Test_pfunc.test_param_strict theano.typed_list.tests.test_basic:test_remove theano.tests.test_printing:test_debugprint theano.tests.test_gradient:test_dxdx

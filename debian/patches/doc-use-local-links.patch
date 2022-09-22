@@ -1,0 +1,150 @@
+Description: Make within-documentation links local
+
+Links were found by
+find doc -iname "*.ipynb" -print0 | xargs -0 sed -i -E -e "s=https?://deeplearning.net/software/theano/==g" 
+find doc -iname "*.txt" -print0 | xargs -0 sed -i -E -e "s=<https?://deeplearning.net/software/theano/=<=g"
+but manual editing is then required to add the right number of ../s.
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Forwarded: no
+Last-Update: 2018-03-18
+
+--- theano-1.0.1+dfsg.orig/README.rst
++++ theano-1.0.1+dfsg/README.rst
+@@ -8,6 +8,8 @@ To install the package, see this page:
+ 
+ For the documentation, see the project website:
+    http://deeplearning.net/software/theano/
++or if the theano-doc package is installed, the local copy:
++   file:///usr/share/doc/theano-doc/html/
+ 
+ Related Projects:
+    https://github.com/Theano/Theano/wiki/Related-projects
+--- theano-1.0.1+dfsg.orig/doc/index.txt
++++ theano-1.0.1+dfsg/doc/index.txt
+@@ -156,7 +156,7 @@ Roughly in order of what you'll want to
+ * :ref:`acknowledgement` -- What we took from other projects.
+ * `Related Projects`_ -- link to other projects that implement new functionalities on top of Theano
+ 
+-You can download the latest `PDF documentation <http://deeplearning.net/software/theano/theano.pdf>`_, rather than reading it online.
++This documentation is `also available in PDF format <theano.pdf>`_.
+ 
+ Check out how Theano can be used for Machine Learning: `Deep Learning Tutorials <http://www.deeplearning.net/tutorial>`_.
+ 
+@@ -224,7 +224,7 @@ It's often helpful to include the follow
+ * If you have an error, the *full* error message, even if it's long
+ * Which versions of Python and Theano you're using
+ * Whether you're using a CPU or GPU device
+-* Details of your Theano configuration settings (you can print this in Python via `print theano.config <http://deeplearning.net/software/theano/library/config.html>`__)
++* Details of your Theano configuration settings (you can print this in Python via `print theano.config <library/config.html>`__)
+ 
+ Spending the time to create a minimal specific example of a problem is likely to get you to an answer quicker than
+ posting something quickly that has too much irrelevant detail or is too vague. A minimal example may take you a bit more
+--- theano-1.0.1+dfsg.orig/doc/introduction.txt
++++ theano-1.0.1+dfsg/doc/introduction.txt
+@@ -134,7 +134,7 @@ Getting started
+ 
+ 
+ A PDF version of the online documentation may be found `here
+-<http://deeplearning.net/software/theano/theano.pdf>`_.
++<theano.pdf>`_.
+ 
+ 
+ Theano Vision
+--- theano-1.0.1+dfsg.orig/doc/library/d3viz/index.ipynb
++++ theano-1.0.1+dfsg/doc/library/d3viz/index.ipynb
+@@ -38,7 +38,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "Like Theano’s [printing module](http://deeplearning.net/software/theano/library/printing.html), ``d3viz``\n",
++    "Like Theano’s [printing module](file:///usr/share/doc/theano-doc/html/library/printing.html), ``d3viz``\n",
+     "requires [graphviz](http://www.graphviz.org) binary to be available."
+    ]
+   },
+@@ -53,7 +53,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "`d3viz` extends Theano’s [printing module](http://deeplearning.net/software/theano/library/printing.html) to interactively visualize compute graphs. Instead of creating a static picture, it creates an HTML file, which can be opened with current web-browsers. `d3viz` allows\n",
++    "`d3viz` extends Theano’s [printing module](file:///usr/share/doc/theano-doc/html/library/printing.html) to interactively visualize compute graphs. Instead of creating a static picture, it creates an HTML file, which can be opened with current web-browsers. `d3viz` allows\n",
+     "\n",
+     "* to zoom to different regions and to move graphs via drag and drop,\n",
+     "* to position nodes both manually and automatically,\n",
+@@ -264,7 +264,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "Theano allows [function profiling](http://deeplearning.net/software/theano/tutorial/profiling.html) via the `profile=True` flag. After at least one function call, the compute time of each node can be printed in text form with `debugprint`. However, analyzing complex graphs in this way can be cumbersome.\n",
++    "Theano allows [function profiling](file:///usr/share/doc/theano-doc/html/tutorial/profiling.html) via the `profile=True` flag. After at least one function call, the compute time of each node can be printed in text form with `debugprint`. However, analyzing complex graphs in this way can be cumbersome.\n",
+     "\n",
+     "`d3viz` can visualize the same timing information graphically, and hence help to spot bottlenecks in the compute graph more easily! To begin with, we will redefine the `predict` function, this time by using `profile=True` flag. Afterwards, we capture the runtime on random data:"
+    ]
+@@ -378,7 +378,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "An [OpFromGraph](http://deeplearning.net/software/theano/library/compile/opfromgraph.html) node defines a new operation, which can be called with different inputs at different places in the compute graph. Each `OpFromGraph` node defines a nested graph, which will be visualized accordingly by `d3viz`."
++    "An [OpFromGraph](file:///usr/share/doc/theano-doc/html/library/compile/opfromgraph.html) node defines a new operation, which can be called with different inputs at different places in the compute graph. Each `OpFromGraph` node defines a nested graph, which will be visualized accordingly by `d3viz`."
+    ]
+   },
+   {
+--- theano-1.0.1+dfsg.orig/doc/library/d3viz/index.txt
++++ theano-1.0.1+dfsg/doc/library/d3viz/index.txt
+@@ -23,14 +23,14 @@ maintained, and it works both in Python
+     pip install pydot-ng
+ 
+ Like Theano’s `printing module
+-<http://deeplearning.net/software/theano/library/printing.html>`__, ``d3viz``
++<../printing.html>`__, ``d3viz``
+ requires `graphviz <http://www.graphviz.org/>`__ binary to be available.
+ 
+ Overview
+ --------
+ 
+ ``d3viz`` extends Theano’s `printing
+-module <http://deeplearning.net/software/theano/library/printing.html>`__
++module <../printing.html>`__
+ to interactively visualize compute graphs. Instead of creating a static
+ picture, it creates an HTML file, which can be opened with current
+ web-browsers. ``d3viz`` allows
+@@ -143,7 +143,7 @@ Profiling
+ ---------
+ 
+ Theano allows `function
+-profiling <http://deeplearning.net/software/theano/tutorial/profiling.html>`__
++profiling <../../tutorial/profiling.html>`__
+ via the ``profile=True`` flag. After at least one function call, the
+ compute time of each node can be printed in text form with
+ ``debugprint``. However, analyzing complex graphs in this way can be
+@@ -210,7 +210,7 @@ OpFromGraph nodes
+ -----------------
+ 
+ An
+-`OpFromGraph <http://deeplearning.net/software/theano/library/compile/opfromgraph.html>`__
++`OpFromGraph <../compile/opfromgraph.html>`__
+ node defines a new operation, which can be called with different inputs
+ at different places in the compute graph. Each ``OpFromGraph`` node
+ defines a nested graph, which will be visualized accordingly by
+--- theano-1.0.1+dfsg.orig/doc/library/sparse/index.txt
++++ theano-1.0.1+dfsg/doc/library/sparse/index.txt
+@@ -27,7 +27,7 @@ This section tries to explain how inform
+ sparse formats of SciPy supported by Theano. There are more formats
+ that can be used with SciPy and some documentation about them may be
+ found `here
+-<http://deeplearning.net/software/theano/sandbox/sparse.html>`_.
++<../../sandbox/sparse.html>`_.
+ 
+ .. Changes to this section should also result in changes to tutorial/sparse.txt.
+ 
+--- theano-1.0.1+dfsg.orig/doc/tutorial/shape_info.txt
++++ theano-1.0.1+dfsg/doc/tutorial/shape_info.txt
+@@ -15,7 +15,7 @@ Currently, information regarding shape i
+ 
+ - To remove computations in the graph when we only want to know the
+   shape, but not the actual value of a variable. This is done with the
+-  `Op.infer_shape <http://deeplearning.net/software/theano/extending/cop.html#Op.infer_shape>`_
++  `Op.infer_shape <../extending/cop.html#Op.infer_shape>`_
+   method.
+ 
+   Example:

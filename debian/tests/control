@@ -1,0 +1,34 @@
+Tests: import
+Depends: python3-theano
+Restrictions: allow-stderr
+
+Tests: selectedupstreamtests
+Depends: python3-theano,
+ g++,
+ python3-pydot,
+ python3-nose,
+ python3-parameterized,
+ python3-pkg-resources,
+ cython3,
+ graphviz
+Restrictions: allow-stderr
+
+# Check that OpenCL isn't totally broken (note that it isn't totally working either)
+# Uses device 0 platform 0, i.e. to use a real GPU manually install its opencl-icd before running this
+# Architecture restriction is because pocl-opencl-icd is not available on all architectures
+Tests: smoketestgpu
+Architecture: amd64 arm64 armel armhf i386
+Depends: python3-theano,
+ g++,
+ python3-pydot,
+ python3-nose,
+ python3-parameterized,
+ python3-pkg-resources,
+ cython3,
+ graphviz,
+ pocl-opencl-icd,
+ python3-pygpu,
+ libclblast-dev,
+ libgpuarray-dev
+Restrictions: allow-stderr
+

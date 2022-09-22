@@ -1,0 +1,52 @@
+Description: Don't use a generic bin directory
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Bug-Debian: https://bugs.debian.org/967006
+Forwarded: no - also requires the directory move in d/rules, probably upstream-CI-breaking
+
+diff --git a/bin/theano-cache b/bin/theano-cache
+index d20362b..489eab6 100755
+--- a/bin/theano-cache
++++ b/bin/theano-cache
+@@ -1,3 +1,3 @@
+ #!/usr/bin/env python3
+-import theano_cache
++from theano.bin import theano_cache
+ theano_cache.main()
+diff --git a/bin/theano-nose b/bin/theano-nose
+index 332c04b..9d2f6de 100755
+--- a/bin/theano-nose
++++ b/bin/theano-nose
+@@ -1,3 +1,3 @@
+ #!/usr/bin/env python3
+-import theano_nose
++from theano.bin import theano_nose
+ theano_nose.main()
+diff --git a/setup.py b/setup.py
+index 95d30a4..057b288 100755
+--- a/setup.py
++++ b/setup.py
+@@ -113,8 +113,8 @@ def do_setup():
+               'theano.d3viz': ['html/*', 'css/*', 'js/*']
+           },
+           entry_points={
+-              'console_scripts': ['theano-cache = bin.theano_cache:main',
+-                                  'theano-nose = bin.theano_nose:main']
++              'console_scripts': ['theano-cache = theano.bin.theano_cache:main',
++                                  'theano-nose = theano.bin.theano_nose:main']
+           },
+           keywords=' '.join([
+               'theano', 'math', 'numerical', 'symbolic', 'blas',
+diff --git a/theano/tests/run_tests_in_batch.py b/theano/tests/run_tests_in_batch.py
+index 0ce3ea2..7c3e46d 100644
+--- a/theano/tests/run_tests_in_batch.py
++++ b/theano/tests/run_tests_in_batch.py
+@@ -95,7 +95,7 @@ def main(stdout=None, stderr=None, argv=None, theano_nose=None,
+     if theano_nose is None:
+         # If Theano is installed with pip/easy_install, it can be in the
+         # */lib/python2.7/site-packages/theano, but theano-nose in */bin
+-        for i in range(1, 5):
++        for i in range(0, 5):
+             path = theano.__path__[0]
+             for _ in range(i):
+                 path = os.path.join(path, '..')

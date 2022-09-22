@@ -1,0 +1,4 @@
+# source is doc/library/d3viz/index.ipynb
+theano source: source-is-missing doc/library/d3viz/examples/*.html
+# these aren't really more 'examples' than many other parts of the documentation, so are installed with it (usr/share/doc/theano-doc/html/_static or _downloads)
+theano source: package-does-not-install-examples doc/library/d3viz/examples/

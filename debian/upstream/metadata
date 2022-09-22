@@ -1,0 +1,13 @@
+Name: Theano
+Cite-As: "Theano Development Team. <a href=http://arxiv.org/pdf/1605.02688.pdf> Theano: A Python framework for fast computation of mathematical expressions</a>"
+Reference:
+    Author: Theano Development Team
+    Title: "Theano: A Python framework for fast computation of mathematical expressions"
+    Eprint: http://arxiv.org/pdf/1605.02688.pdf
+    Year: 2016
+Other-References: https://github.com/Theano/Theano/blob/master/doc/citation.txt
+Repository-Browse: https://github.com/Theano/Theano
+Repository: https://github.com/Theano/Theano.git
+Bug-Database: https://github.com/Theano/Theano/issues
+Contact: https://groups.google.com/group/theano-users
+Archive: PyPI

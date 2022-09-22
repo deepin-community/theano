@@ -1,0 +1,18 @@
+Description: Don't use add_stylesheet
+
+Author: Rebecca N. Palmer <rebecca_palmer@zoho.com>
+Bug-Debian: https://bugs.debian.org/997382
+Origin: based on Graham Inggs' libgpuarray patch #997026
+Forwarded: no
+
+--- theano-1.0.5+dfsg.orig/doc/conf.py
++++ theano-1.0.5+dfsg/doc/conf.py
+@@ -136,7 +136,7 @@ if os.environ.get('READTHEDOCS') != 'Tru
+     html_theme = 'sphinx_rtd_theme'
+ 
+ def setup(app):
+-    app.add_stylesheet("fix_rtd.css")
++    app.add_css_file("fix_rtd.css")
+ 
+ # The name for this set of Sphinx documents.  If None, it defaults to
+ # "<project> v<release> documentation".

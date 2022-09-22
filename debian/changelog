@@ -1,0 +1,340 @@
+theano (1.0.5+dfsg-5) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>  Tue, 14 Jun 2022 09:52:52 +0800
+
+theano (1.0.5+dfsg-5) unstable; urgency=medium
+
+  * Use terser.  (Closes: #1001030)
+  * Enable Salsa CI, but skip the build-time tests there.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sat, 02 Apr 2022 19:52:33 +0100
+
+theano (1.0.5+dfsg-4) unstable; urgency=medium
+
+  * Docs: stop using add_stylesheet.  (Closes: #997382)
+  * Tests: use POCL_DEVICES=basic on armel/armhf (workaround for #997908).
+  * Add/update Lintian overrides.
+  * Update Built-Using.
+  * Update d/watch.
+  * Add missing build-dependencies for PDF documentation.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sun, 14 Nov 2021 13:47:39 +0000
+
+theano (1.0.5+dfsg-3) unstable; urgency=medium
+
+  * Tests: stop using clblas and skip-not-installable.  (Closes: #993107)
+  * Bump Standards-Version to 4.6.0 (no changes needed).
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sun, 29 Aug 2021 15:25:55 +0100
+
+theano (1.0.5+dfsg-2) unstable; urgency=medium
+
+  * Allow cross-building.  (Closes: #980485)  Thanks to Helmut Grohne.
+  * Bump Standards-Version to 4.5.1 (no changes needed).
+  * Upstream have moved.  Update watch file.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sat, 06 Feb 2021 13:35:30 +0000
+
+theano (1.0.5+dfsg-1) unstable; urgency=medium
+
+  * New upstream release (by a new maintainer).  Drop/refresh patches.
+  * Update d/copyright.
+  * Use uglifyjs.terser (see #968137).
+  * Don't skip sympy-using tests.
+  * Bump debhelper compat to 13.
+  * Don't use /usr/lib/python3/dist-packages/bin.  (Closes: #967006)
+  * Run autopkgtests on the installed module not the source tree.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sun, 16 Aug 2020 13:33:47 +0100
+
+theano (1.0.4+dfsg-3) unstable; urgency=medium
+
+  * Use packaged (but still build-time copied) dagre* and graphlib.
+  * Embedded graphlib-dot: update, verbose build, run tests,
+    fix build with pegjs 0.10 (Closes: #959758).
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Wed, 06 May 2020 22:59:23 +0100
+
+theano (1.0.4+dfsg-2) unstable; urgency=medium
+
+  * Allow building with Sphinx 2.  (Closes: #955065)
+  * Fix SyntaxWarnings.  (Closes: #950463)
+  * Bump Standards-Version to 4.5.0 (no changes needed).
+  * Fix exceptions / test failures with current numpy and scipy.
+  * Fail the build on test failures.  With the above, Closes: #955471.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Thu, 02 Apr 2020 18:48:22 +0100
+
+theano (1.0.4+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop patch applied upstream, refresh others.
+  * Drop Python 2 package (see #938661) and avoid Python 2 use.
+  * Bump Standards-Version to 4.4.1 (no changes needed).
+  * Bump debhelper compat to 12 and use debhelper-compat.
+  * Remove broken documentation link.
+  * Reproducibility: strip build path dependence from Cython output.
+  * Attempt build on all architectures.  (Some will probably fail.)
+  * Recommend libgpuarray-dev.
+  * Warn that OpenCL support may be buggy,
+    but test that it isn't totally broken.
+  * Rename autopkgtests to remove forbidden characters.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Mon, 04 Nov 2019 21:17:14 +0000
+
+theano (1.0.3+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patch.
+  * Don't list the old upstream as contact.
+  * Install release notes as NEWS.gz to comply with
+    Standards-Version 4.3.0.
+  * tests: Stop using deprecated needs-recommends.
+  * Fix crash with numpy 1.16.  (Closes: #918090)
+  * Check that d3viz profiling runs but, for reproducibility,
+    don't regenerate the profiling output in the documentation.
+  * Don't apply numpy_api_changes.diff when using Cython >= 0.29,
+    as the code it patches no longer exists.  (Closes: #918771)
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Thu, 10 Jan 2019 19:12:25 +0000
+
+theano (1.0.2+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Split up the test suite to avoid running out of memory
+    (workaround for #898126 / LP#1769672), but don't hide output.
+  * Rebuild doc/library/d3viz/*.html, and tell Lintian where their
+    source is.
+    (This is unreproducible as some of them contain profiling output,
+    but we're unreproducible anyway due to uglifyjs.)
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Fri, 15 Jun 2018 08:23:45 +0100
+
+theano (1.0.1+dfsg-2) unstable; urgency=medium
+
+  * Recommend python(3)-parameterized instead of -nose-parameterized,
+    and add python(3)-pkg-resources.
+  * Set allow-stderr on import tests.
+  * Remove X-Python3-Version.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sun, 06 May 2018 11:02:28 +0100
+
+theano (1.0.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop 878596.patch, applied upstream.
+  * Switch to python(3)-parameterized,
+    drop old-nose-parameterized.patch.
+  * Refresh patches.
+  * Change Vcs-* to Salsa.
+  * Remove X-Python-Version, update X-Python3-Version.
+  * Update and improve d/copyright.
+  * Add Cython dependencies, rebuild Cython-generated C code.
+  * Use upstream's script for building documentation, but also build
+    README.html.  Support nodoc.
+  * Use local rather than web links within documentation.
+  * Recommend graphviz (for printing/d3viz), accept python-pydot-ng,
+    and build-depend on them to allow testing.
+  * Bump debhelper compat to 11.
+  * Bump Standards-Version to 4.1.4 (no changes needed).
+  * Add d/upstream/metadata.
+  * Warn that upstream development is ending.
+  * Add Breaks: on older versions of lasagne (see #893656).
+  * Set Rules-Requires-Root: no.
+  * Add autopkgtests.
+  * Clarify cache directory permission errors (see #896220, #896421).
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sat, 05 May 2018 11:03:51 +0100
+
+theano (0.9.0+dfsg-2) unstable; urgency=medium
+
+  * Team upload.
+  [ Rebecca Palmer ]
+  * Really remove the pre-minified Javascript.
+  * Fix test failures on big-endian systems.  (Closes: #878596)
+
+ -- Daniel Stender <stender@debian.org>  Wed, 08 Nov 2017 08:09:59 +0100
+
+theano (0.9.0+dfsg-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop patches applied upstream, refresh others.
+  * Only remove the privacy-violating part of doc/index.txt,
+    not all of News and Download.
+  * Change Uploaders.  (Closes: #852138)
+  * Update and sort d/copyright.
+  * Disable another wall-clock speed test (similar to #835531).
+  * Bump Standards-Version to 4.1.1 (no changes needed).
+  * Bump compat to 10.
+  * Recommend python(3)-pygpu and g++.
+  * Use the Python 3 versions of sphinx and pygments.
+  * Build-depend on python3-sphinx-rtd-theme.
+  * Use the version in doc->source links,
+    not a (usually non-existent) git commit number.
+  * Make tests work with older nose-parameterized.
+  * Use python(3)-dev not -all-dev.  (Closes: #867370)
+  * Remove pre-minified Javascript, and instead minify at build time.
+  * Use libjs-d3 instead of the embedded copy, but re-minify to
+    work around #745688.
+  * Clean up properly after build.
+  * Use Suggests, not Recommends, between package and documentation.
+
+ -- Rebecca N. Palmer <rebecca_palmer@zoho.com>  Sat, 30 Sep 2017 13:50:38 +0100
+
+theano (0.8.2-6) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Daniel Stender <stender@debian.org>  Wed, 15 Feb 2017 09:09:46 +0100
+
+theano (0.8.2-6~exp1) experimental; urgency=medium
+
+  * add disable-overly-environment-dependent-test.patch (Closes: #835531).
+  * add fix-invalid-casts-negative-stride-handling.patch
+    (Closes: #831541,#855102) [thanks again to Rebecca N. Palmer].
+
+ -- Daniel Stender <stender@debian.org>  Wed, 15 Feb 2017 00:08:13 +0100
+
+theano (0.8.2-5) unstable; urgency=medium
+
+  *  Upload to unstable.
+
+ -- Daniel Stender <stender@debian.org>  Tue, 14 Feb 2017 09:47:30 +0100
+
+theano (0.8.2-5~exp1) experimental; urgency=medium
+
+  * add fix-test_fit_int64-for-python3-32bit.patch (Closes: #831540)
+    [thanks to Rebecca N. Palmer].
+  * deb/rules: remove test failsafes completely.
+
+ -- Daniel Stender <stender@debian.org>  Mon, 13 Feb 2017 23:53:19 +0100
+
+theano (0.8.2-4) unstable; urgency=medium
+
+  * add fixes-for-numpy-1.12.patch (Closes: #848764) [thanks to
+    Rebecca N. Palmer].
+
+ -- Daniel Stender <stender@debian.org>  Mon, 13 Feb 2017 15:04:06 +0100
+
+theano (0.8.2-3) unstable; urgency=medium
+
+  * Upload to unstable.
+  * deb/control:
+    + don't build on all supported archs.
+    + move the info block on nvidia-cuda-toolkit down.
+  * deb/rules:
+    + narrow temporary failsafe down to i386 and s390x.
+  * Dropped deb/README.Debian (obsolete).
+
+ -- Daniel Stender <stender@debian.org>  Sat, 16 Jul 2016 18:33:21 +0200
+
+theano (0.8.2-2) experimental; urgency=medium
+
+  * deb/copyright:
+    + split a paragraph.
+  * deb/rules:
+    + don't run tests on FAST_COMPILE (faster, but makes too many
+      problems), and no arch solely on Python (not needed anymore).
+  * strip-docs.patch:
+    + remove `NEWS` (out-of-date) and `Download` (obsolete) from index.
+
+ -- Daniel Stender <stender@debian.org>  Fri, 15 Jul 2016 15:34:00 +0200
+
+theano (0.8.2-1) experimental; urgency=medium
+
+  * New upstream release:
+    + unfuzz strip-docs.patch.
+  * deb/control:
+    + add six to build deps.
+    + add nose-parameterized to build and binary package deps.
+    + use virtual libblas.so for the deps of binary packages.
+  * deb/copyright:
+    + add doc/.templates/layout.html to Files-Excluded (all privacy
+      breaches).
+    + updated (copyright span, new paragraphs).
+  * deb/rules:
+    + add empty config.cxx to THEANO_FLAGS on some archs (which are not
+      recognizing Theano's default flags "-m32" and "-m64").
+    + block web access for sphinx-build regardless.
+    + add override for dh_compress.
+    + rearrange logically.
+  * deb/source/options:
+    + add ignore pattern for egg-info directory.
+  * add:
+    + deb/README.Debian (with info on disabling compilation).
+    + deb/missing-source (d3.js, dagre-d3.js, graphlib-dot.js).
+    + deb/source.lintian-overrides.
+
+ -- Daniel Stender <stender@debian.org>  Tue, 12 Jul 2016 11:06:03 +0200
+
+theano (0.7-5) unstable; urgency=medium
+
+  * deb/control: build with libblas-dev.
+
+ -- Daniel Stender <stender@debian.org>  Sun, 10 Jul 2016 10:39:50 +0200
+
+theano (0.7-4) unstable; urgency=medium
+
+  * deb/control:
+    + alternatively depend on libblas-dev (build and binary packages).
+  * deb/rules:
+    + fixed base_compiledir in export for THEANO_FLAGS.
+    + added FAST_COMPILE mode switch to THEANO_FLAGS.
+    + run tests with bin/theano-nose.
+
+ -- Daniel Stender <stender@debian.org>  Sun, 10 Jul 2016 01:07:54 +0200
+
+theano (0.7-3) unstable; urgency=medium
+
+  * deb/control: use 'Architecture: any' for binary packages.
+  * Dropped deb/source.lintian-overrides (no-arch-any).
+
+ -- Daniel Stender <stender@debian.org>  Sat, 02 Jul 2016 18:22:31 +0200
+
+theano (0.7-2) unstable; urgency=medium
+
+  * Run build time tests (Closes: #824116):
+    + complete dh_auto_test override in deb/rules.
+    + add DEB_BUILD_OPTIONS export for nocheck (disabled by default).
+    + add libopenblas-dev and python{,3}-nose to deb/control.
+  * deb/control:
+    + bump standards to 3.9.8 (no changes needed).
+    + build depend against python{,3}-all-dev packages (needed for tests
+      and docs).
+    + add install_requires (numpy and scipy) to build-deps.
+    + add rdfind and symlink to build deps.
+    + build against python-sphinx (not yet ready for python3-sphinx),
+      and python-pygments.
+    + add dvipng and texlive-latex-extra to build deps (for ext.pngmath).
+    + remove unnecessary comment text.
+    + remove g++ from binary package deps (not needed fallback).
+  * deb/copyright:
+    + remove everything but .gitignore from Files-Excluded.
+    + update email address.
+  * deb/rules:
+    + add export for THEANO_FLAGS with some needed configs (e.g. compiledir).
+    + add override for dh_auto_install containing a custom removal.
+    + add PYTHONPATH to sphinx-build.
+    + run rdfind and symlinks in dh_installdocs override.
+    + add removal for extra-license-file in docs package (dh_sphinxdoc
+      override).
+  * deb/watch:
+    + improved filenamemangler.
+  * Added deb/source.lintian-overrides.
+
+ -- Daniel Stender <stender@debian.org>  Fri, 01 Jul 2016 23:26:54 +0200
+
+theano (0.7-1) unstable; urgency=medium
+
+  * Upload to unstable.
+  * deb/control: updated uploader email address.
+
+ -- Daniel Stender <stender@debian.org>  Sat, 25 Jun 2016 15:17:25 +0200
+
+theano (0.7-1~exp1) experimental; urgency=medium
+
+  * Initial release (Closes: #576540).
+
+ -- Daniel Stender <debian@danielstender.com>  Thu, 25 Feb 2016 19:28:29 +0100
